@@ -1,0 +1,114 @@
+
+/*html, body {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  } 
+  body {
+    display: grid;
+    grid-template-rows: 150px auto 100px;
+  } */
+
+
+  html body {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+     display:grid;
+
+     grid-template-rows: 150px [nav-start] auto 100px [nav-end];
+     grid-template-columns: minmax(200px, 3fr) 9fr;
+     grid-template-areas: "header header"
+                          "nav content"
+                          "nav footer";
+  }
+
+
+header { grid-area: banner; }
+
+nav { grid-area: nav; }
+
+.header {
+    width: 100%;
+    background-color: #d9d9d9;
+}
+
+.main {
+    display: flex;
+    background-color: tomato;
+
+}
+
+.master {
+    width: 45%;
+    border: thin dashed lightblue;
+}
+
+.detail {
+    width: 45%;
+    border: thin dashed blueviolet;
+}
+
+.sidebar {
+ 
+   
+    
+    border: thin dashed gray;
+}
+
+.content {
+    min-height: 100vw;
+  
+    border: thin dashed greenyellow;
+}
+.table {
+    min-width:  650px;
+}
+tr {
+    padding: 5px;
+}
+
+.normal td {
+    background-color: green;
+}
+
+.alarm  td{
+    background-color: red;
+}
+
+.cell {
+    padding: 5px;
+}
+
+.failure {
+    color: red;
+    font-weight: 900;
+    
+}
+
+.normal {
+    color: black;
+    
+}
+
+/* @media (min-width: 40em) {
+    body {
+        grid-template-areas: 
+         'banner banner'
+         'nav main'
+         'nav footer'
+        
+
+    }
+} */
+
+/* header { grid-area: banner}
+nav { grid-area: nav }
+main { grid-area: main } 
+footer { grid-area: footer} */
+

@@ -1,0 +1,63 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    
+}
+
+.services {
+    padding: 10px;
+    margin: 10px;
+}
+
+.hero {
+    width: 100%;
+    height: 4vh;
+    background-color: #5d5d5d;
+    color: white;
+  
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    overflow-y: hidden;
+   
+    height: 90vh;
+}
+
+.master {
+    width: 50%;
+    background-color: whitesmoke;
+
+}
+
+.detail {
+    width: 50%;
+    background-color: whitesmoke;
+    border-left: thin dashed #5d5d5d;
+    
+}
+
+
+
+.nav {
+    width: 20vw;
+    background-color: #003366;
+    height: 90vh;
+}
+
+.main {
+    width: 90vw;
+    background-color: whitesmoke;
+}
+
+.footer {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    height: 6vh;
+}
