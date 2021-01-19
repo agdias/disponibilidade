@@ -1,4 +1,4 @@
-const endpoint = window.encodeURI("http://zabbixcpapphml01.intra.tjmg.gov.br/zabbix/api_jsonrpc.php")
+const endpoint = window.encodeURI("http://10.0.40.181/zabbix/api_jsonrpc.php")
 
 const headers = {
     "Content-Type":"application/json"

@@ -5,7 +5,12 @@ import { addServices } from '../actions'
 import { Button,
          Form,
          Select } from 'semantic-ui-react'
-import { subDays } from 'date-fns'
+import { subDays, format } from 'date-fns'
+import  DatePicker  from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import pt from  'date-fns/locale/pt-BR'
+
+
 
 class Availability extends React.Component {
     constructor(props) {
@@ -14,7 +19,11 @@ class Availability extends React.Component {
             token: null,
             error: null,
             serviceid: null,
-            period: "diario"
+            period: "diario",
+            result: null,
+            startDate: null,
+            endDate: null
+            
             
         }
 
@@ -23,6 +32,7 @@ class Availability extends React.Component {
         this.onPeriodChangeHandler = this.onPeriodChangeHandler.bind(this)
         this.onSubmitHandler = this.onSubmitHandler.bind(this)
         this.timeFactor = this.timeFactor.bind(this)
+        this.setStartDate = this.setStartDate.bind(this)
     }
 
     componentDidMount() {
@@ -45,15 +55,21 @@ class Availability extends React.Component {
        const today = Date.now()
 
        getSLA(token, serviceid,tf, today)
-         .then((result) => console.info(result,"***"))
+        //  .then((result) => console.info(result,"***"))
+         .then((result) => this.setState({result}))
        
    }
    onServiceChangeHandler(event, { value }) {   
+       console.info(value)
        this.setState({serviceid:value})
     }
 
     onPeriodChangeHandler(event, {value}) {
         this.setState({period:value})
+    }
+
+    setStartDate(date) {
+        this.setState({date})
     }
 
     timeFactor() {
@@ -132,7 +148,9 @@ class Availability extends React.Component {
             
               <div>
                   <div className="services">
+                 
 
+               
                   
                   <Form onSubmit={this.onSubmitHandler}>
                       <Form.Group inline>
@@ -147,19 +165,38 @@ class Availability extends React.Component {
                               options={this.buildOptions()}
                             />
                           }
-                          <Form.Field
+                          {/* <Form.Field
                             control={Select}
                             onChange={this.onPeriodChangeHandler}
                             label="Período"                           
                             placeholder="Período"
                             options={periodo}
+                          /> */}
+                          <Form.Field
+                            control={DatePicker}
+                            locale={pt}
+                            label="Data Inicial"
+                            selected={this.state.startDate}
+                            onChange={(date) => this.setState({startDate:date})}
                           />
-                         <Button  color="blue" type="submit">Consultar</Button>      
+                           <Form.Field
+                            control={DatePicker}
+                            locale={pt}
+                            label="Data Final"
+                            selected={this.state.endDate}
+
+                            onChange={(date) => this.setState({endDate:date})}
+                          />
+                        
+                         <Button  color="instagram" type="submit">Consultar</Button>      
                        </Form.Group>
                   </Form>
                 </div>
                 <div className="results">
-                 
+                  {
+                      this.state.result &&
+                      <pre>{JSON.stringify(this.state.result, null, 2)}</pre>
+                  }
                 </div>
               </div>
         )
