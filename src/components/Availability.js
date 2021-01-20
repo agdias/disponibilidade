@@ -5,7 +5,7 @@ import { addServices } from '../actions'
 import { Button,
          Form,
          Select } from 'semantic-ui-react'
-import { subDays, format } from 'date-fns'
+import { subDays } from 'date-fns'
 import  DatePicker  from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import pt from  'date-fns/locale/pt-BR'
@@ -29,10 +29,11 @@ class Availability extends React.Component {
 
         this.buildOptions = this.buildOptions.bind(this)
         this.onServiceChangeHandler = this.onServiceChangeHandler.bind(this)
-        this.onPeriodChangeHandler = this.onPeriodChangeHandler.bind(this)
+        // this.onPeriodChangeHandler = this.onPeriodChangeHandler.bind(this)
         this.onSubmitHandler = this.onSubmitHandler.bind(this)
         this.timeFactor = this.timeFactor.bind(this)
-        this.setStartDate = this.setStartDate.bind(this)
+        this.onStartDateChangeHandler = this.onStartDateChangeHandler.bind(this)
+        this.onEndDateChangeHandler = this.onEndDateChangeHandler.bind(this)
     }
 
     componentDidMount() {
@@ -41,6 +42,8 @@ class Availability extends React.Component {
           .then((services) => dispatch(addServices(services)))
           .catch((error) => this.setState({error:"Error"}))
 
+
+
         this.buildOptions()
 
         
@@ -48,14 +51,16 @@ class Availability extends React.Component {
     }
 
    onSubmitHandler(e) {
-       const {  serviceid } = this.state
+       const {  serviceid, startDate, endDate } = this.state
        const { token } = this.props
+      
+      
        e.preventDefault()
-       const tf = this.timeFactor()
-       const today = Date.now()
+       
+       
 
-       getSLA(token, serviceid,tf, today)
-        //  .then((result) => console.info(result,"***"))
+       getSLA(token, serviceid, startDate/1000, endDate/1000)
+       
          .then((result) => this.setState({result}))
        
    }
@@ -68,9 +73,17 @@ class Availability extends React.Component {
         this.setState({period:value})
     }
 
-    setStartDate(date) {
-        this.setState({date})
+    onStartDateChangeHandler(date) {
+
+        const now = Date.parse(date)
+        this.setState({startDate:now})
+
     }
+
+    onEndDateChangeHandler(date) {
+        const now = Date.parse(date)
+        this.setState({endDate:now})
+        }
 
     timeFactor() {
         const { period } = this.state
@@ -177,7 +190,7 @@ class Availability extends React.Component {
                             locale={pt}
                             label="Data Inicial"
                             selected={this.state.startDate}
-                            onChange={(date) => this.setState({startDate:date})}
+                            onChange={(date) => this.onStartDateChangeHandler(date)}
                           />
                            <Form.Field
                             control={DatePicker}
@@ -185,7 +198,7 @@ class Availability extends React.Component {
                             label="Data Final"
                             selected={this.state.endDate}
 
-                            onChange={(date) => this.setState({endDate:date})}
+                            onChange={(date) => this.onEndDateChangeHandler(date)}
                           />
                         
                          <Button  color="instagram" type="submit">Consultar</Button>      

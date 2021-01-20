@@ -26,14 +26,17 @@ class App extends React.Component  {
 
     const { dispatch,services } = this.props
    
-    const user = "Admin_Zabbix"
-    const password = "Z@bB1Xx" 
+    //const user = "Admin_Zabbix"
+    //const password = "Z@bB1Xx" 
+
+    const user = "p4122982"
+    const password = "l07u$20!3"
    
   
     authenticate(user,password)
       .then((token) => {this.setState({token})})
       .catch((error) => {
-        console.log(error)
+        this.setState({error})
       })
     
  

@@ -1,7 +1,7 @@
-const endpoint = window.encodeURI("http://10.0.40.181/zabbix/api_jsonrpc.php")
+const endpoint = window.encodeURI("http://10.0.40.174/zabbix/api_jsonrpc.php")
 
 const headers = {
-    "Content-Type":"application/json"
+    "Content-Type":"application/json-rpc"
 }
 
 export function authenticate(username, password) {
@@ -62,13 +62,15 @@ export function getServices(token) {
     })
 }
 
-export function getSLA(token, serviceids, start, end) {
-    
+export function getSLA(token,serviceids, start, end) {
+   
     return fetch(endpoint, {
         method: "POST",
         headers: {...headers},
         body: JSON.stringify({
             "jsonrpc":"2.0",
+            "auth": token,
+            "id": "1",
             "method": "service.getsla",
             "params": {
                 "serviceids": serviceids,
@@ -81,8 +83,7 @@ export function getSLA(token, serviceids, start, end) {
                 ]
 
             },
-            "auth": token,
-            "id": 1
+           
         })
     })
     .then(response => response.json())
@@ -92,6 +93,29 @@ export function getSLA(token, serviceids, start, end) {
         }
 
         return result
+    })
+}
+
+export function getHostGroups(token) {
+    return fetch(endpoint, {
+        method: "POST",
+        headers: {...headers},
+        body: JSON.stringify({
+            "jsonrpc":"2.0",
+            "method":"hostgroup.get",
+            "params": {
+               "output": "extend",
+               "filter": {
+                   "name": [
+                       "Roteadores"
+                   ]
+               }
+            },
+            "auth": token,
+            "id": 1
+
+        }
+        )
     })
 }
 
