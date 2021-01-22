@@ -157,6 +157,7 @@ class Availability extends React.Component {
 
         ]
         
+        
         return (
             
               <div>

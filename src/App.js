@@ -1,7 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { addToken } from './actions'
+import Report from './components/Report'
 import { authenticate } from './utils/api2'
+
 
 
 import  Availability  from './components/Availability'
@@ -44,12 +44,14 @@ class App extends React.Component  {
 
 
   render() {
-    const { token, error } = this.state
+    const { token , error} = this.state
+    
   
     return (
       <div className="App">
+       
         { error && <p>{error}</p>}
-        {token && <Availability token={token} /> }
+         {token && <Report token={token} /> } 
         
       </div>
 

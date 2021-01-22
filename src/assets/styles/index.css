@@ -6,6 +6,7 @@ html, body {
 body {
     min-height: 100vh;
     
+    
 }
 
 .services {
@@ -19,6 +20,16 @@ body {
     background-color: #5d5d5d;
     color: white;
   
+}
+
+.heading {
+    width: 80%;
+    margin: 25px auto;    
+}
+
+.reports {
+    width: 80%;
+    margin: 25px  auto;
 }
 
 .content {

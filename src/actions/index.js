@@ -15,19 +15,15 @@ export  function addServices(services) {
     }
 }
 
-export function getSLA(sla) {
+export function addSLA(sla) {
     return {
         type: 'ADD_SLA',
         sla
+        
     }
 }
 
 
 
-export function addBulkPosts(posts) {
-    return {
-        type: 'ADD_BULK_POSTS',
-        posts
-    }
-}
+
 

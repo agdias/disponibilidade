@@ -11,14 +11,15 @@ export  function servicesReducer(state=[], action) {
     }
 }
 
-export function slaReducer(state={}, action) {
-    const { type, sla, serviceId } = action
+export function slaReducer(state=[], action) {
+    const { type, sla } = action
     switch ( type ) {
         case 'ADD_SLA':
             return {
-                [serviceId]: {
-                    ...sla
-                }
+                ...state,
+                ...sla
             }
+        default:
+            return state;
     }
 }
