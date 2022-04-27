@@ -30,7 +30,7 @@ class App extends React.Component  {
     //const password = "Z@bB1Xx" 
 
     const user = "p4122982"
-    const password = "l07u$20!3"
+    const password = "<censored>"
    
   
     authenticate(user,password)
